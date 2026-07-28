@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables & secrets — NEVER commit these
+.env
+**/.env
+*.env
+
+# Build output
+dist/
+**/dist/
+.next/
+**/.next/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor junk
+.DS_Store
+*.swp
+.vscode/
+
+# Playwright
+**/playwright-report/
+**/test-results/
