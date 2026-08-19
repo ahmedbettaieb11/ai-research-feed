@@ -12,6 +12,8 @@ import { ResearchModule } from './research/research.module';
       connection: {
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
+        username: process.env.REDIS_USERNAME,
+        password: process.env.REDIS_PASSWORD,
       },
     }),
     BullModule.registerQueue({ name: 'research' }),

@@ -36,11 +36,12 @@ export class ResearchService {
 
   streamProgress(jobId: string): Observable<MessageEvent> {
     return new Observable((subscriber) => {
-      const redis = new Redis({
+     const redis = new Redis({
         host: process.env.REDIS_HOST,
         port: Number(process.env.REDIS_PORT),
+        username: process.env.REDIS_USERNAME,
+        password: process.env.REDIS_PASSWORD,
       });
-
       let closed = false;
       const cleanup = () => {
         if (closed) return;

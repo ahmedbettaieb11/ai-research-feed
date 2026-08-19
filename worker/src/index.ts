@@ -7,8 +7,9 @@ import { MongoClient } from 'mongodb';
 const connection = {
   host: process.env.REDIS_HOST,
   port: Number(process.env.REDIS_PORT),
+  username: process.env.REDIS_USERNAME,
+  password: process.env.REDIS_PASSWORD,
 };
-
 const cache = new Redis(connection);
 const publisher = new Redis(connection);
 const CACHE_TTL_SECONDS = 3600;
