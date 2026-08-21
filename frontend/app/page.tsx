@@ -23,6 +23,7 @@ type Result = {
 };
 
 export default function Home() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
   const [topic, setTopic] = useState('');
   const [url, setUrl] = useState('');
   const [stage, setStage] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export default function Home() {
   const [results, setResults] = useState<Result[]>([]);
 
   async function loadResults() {
-    const res = await fetch('http://localhost:3000/research');
+    const res = await fetch(`${API_URL}/research`);
     const data = await res.json();
     setResults(data);
   }
@@ -45,7 +46,7 @@ export default function Home() {
     setSummary(null);
     setError(null);
 
-    const res = await fetch('http://localhost:3000/research', {
+    const res = await fetch(`${API_URL}/research`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ topic, url }),
@@ -53,7 +54,7 @@ export default function Home() {
     const data = await res.json();
     const jobId = data.jobId;
 
-    const source = new EventSource(`http://localhost:3000/research/${jobId}/stream`);
+    const source = new EventSource(`${API_URL}/research/${jobId}/stream`);
 
     source.onmessage = (event) => {
       const payload = JSON.parse(event.data);
